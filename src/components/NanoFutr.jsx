@@ -1,0 +1,1178 @@
+import React, { useState, useEffect } from 'react';
+
+import { motion, AnimatePresence } from 'framer-motion';
+
+import { 
+
+  Sun, Moon, Droplets, Wind, Leaf, ShieldCheck, 
+
+  ShoppingBag, Coffee, Activity, ArrowRight, Menu, X, 
+
+  ChevronRight, ChevronLeft, Star, CheckCircle2
+
+} from 'lucide-react';
+
+const NanoFutr = () => {
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  
+
+  // Changed from storing the object to storing the index for carousel navigation
+
+  // null = closed, 0,1,2 = open at that index
+
+  const [activeSectorIndex, setActiveSectorIndex] = useState(null); 
+
+  
+
+  const [currentTechImage, setCurrentTechImage] = useState(0);
+
+  // Tech Carousel Images
+
+  const techImages = [
+
+    "https://images.unsplash.com/photo-1565538420870-da58537604ee?auto=format&fit=crop&q=80&w=1000", // Hydrophobic/Water beads close up - fits "Nano" perfectly
+
+    "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&q=80&w=1000", // Modern minimalist fashion/retail
+
+    "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000"  // Futuristic Lab/Healthcare
+
+  ];
+
+  // Carousel Logic for Tech Section
+
+  useEffect(() => {
+
+    const timer = setInterval(() => {
+
+      setCurrentTechImage((prev) => (prev + 1) % techImages.length);
+
+    }, 4000);
+
+    return () => clearInterval(timer);
+
+  }, []);
+
+  // Handle scroll for navbar transparency
+
+  useEffect(() => {
+
+    const handleScroll = () => {
+
+      setIsScrolled(window.scrollY > 20);
+
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+
+  }, []);
+
+  const toggleTheme = () => setDarkMode(!darkMode);
+
+  // Smooth Scroll Function
+
+  const scrollToSection = (e, id) => {
+
+    e.preventDefault();
+
+    const element = document.getElementById(id);
+
+    if (element) {
+
+      const yOffset = -100; // Offset to account for fixed navbar height
+
+      const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+
+      window.scrollTo({ top: y, behavior: 'smooth' });
+
+    }
+
+    setMobileMenuOpen(false);
+
+  };
+
+  // Modal Carousel Navigation
+
+  const nextSector = (e) => {
+
+    e?.stopPropagation();
+
+    setActiveSectorIndex((prev) => (prev === null ? null : (prev + 1) % sectorsData.length));
+
+  };
+
+  const prevSector = (e) => {
+
+    e?.stopPropagation();
+
+    setActiveSectorIndex((prev) => (prev === null ? null : (prev - 1 + sectorsData.length) % sectorsData.length));
+
+  };
+
+  // Animation variants
+
+  const fadeInUp = {
+
+    hidden: { opacity: 0, y: 60 },
+
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+
+  };
+
+  const staggerContainer = {
+
+    hidden: { opacity: 0 },
+
+    visible: {
+
+      opacity: 1,
+
+      transition: {
+
+        staggerChildren: 0.2
+
+      }
+
+    }
+
+  };
+
+  const sectorsData = [
+
+    { 
+
+      name: "Retail", 
+
+      img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000", 
+
+      short: "From boutiques to service stations.",
+
+      description: "In the fast-paced retail environment, your team's appearance is part of the customer experience. Our retail uniforms combine high-fashion aesthetics with industrial durability.",
+
+      features: ["Stain-resistant for coffee shops & food retail", "Breathable fabrics for active floor staff", "Custom branding options"]
+
+    },
+
+    { 
+
+      name: "Hospitality", 
+
+      img: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000", 
+
+      short: "Hotels, restaurants, and cafes.",
+
+      description: "First impressions matter most in hospitality. We provide elegant, comfortable uniforms that withstand the rigors of daily service while maintaining a crisp, pristine look.",
+
+      features: ["Odor-control for long shifts", "Easy-iron technology", "Elegant cuts for front-of-house staff"]
+
+    },
+
+    { 
+
+      name: "Healthcare", 
+
+      img: "https://images.unsplash.com/photo-1516574187841-693083f7e74f?auto=format&fit=crop&q=80&w=1000", 
+
+      short: "Specialized scrubs and lab coats.",
+
+      description: "Our healthcare line is engineered for safety and hygiene. Featuring advanced antimicrobial finishes and fluid-repellent barriers, our scrubs protect those who protect us.",
+
+      features: ["Antimicrobial fabric technology", "Fluid repellent barrier", "Maximum mobility design"]
+
+    },
+
+  ];
+
+  return (
+
+    <div className={`min-h-screen transition-colors duration-700 ease-in-out font-sans selection:bg-blue-500 selection:text-white ${darkMode ? 'bg-slate-950 text-slate-100' : 'bg-white text-blue-950'}`}>
+
+      
+
+      {/* --- NAVBAR --- */}
+
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-xl border-b shadow-lg ' + (darkMode ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-blue-100') : 'bg-transparent border-transparent'}`}>
+
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+          <div className="text-2xl font-black tracking-tighter flex items-center gap-2 cursor-pointer" onClick={(e) => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+
+            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${darkMode ? 'bg-blue-500 text-white' : 'bg-blue-600 text-white'}`}>
+
+              <span className="font-bold text-lg">N</span>
+
+            </div>
+
+            <span>NANO<span className={darkMode ? "text-blue-400" : "text-blue-600"}>FUTR</span></span>
+
+          </div>
+
+          {/* Desktop Nav */}
+
+          <div className="hidden md:flex items-center gap-8">
+
+            {['Why Us', 'Technology', 'Sectors', 'Process'].map((item) => {
+
+              const id = item.toLowerCase().replace(' ', '-');
+
+              return (
+
+                <a 
+
+                  key={item} 
+
+                  href={`#${id}`}
+
+                  onClick={(e) => scrollToSection(e, id)}
+
+                  className={`text-sm font-bold uppercase tracking-widest hover:text-blue-600 transition-colors ${darkMode ? 'text-slate-400' : 'text-blue-900/60'}`}
+
+                >
+
+                  {item}
+
+                </a>
+
+              );
+
+            })}
+
+          </div>
+
+          <div className="flex items-center gap-4">
+
+            <button 
+
+              onClick={toggleTheme}
+
+              className={`p-2 rounded-full transition-all hover:scale-110 active:scale-95 ${darkMode ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700' : 'bg-blue-50 text-blue-600 hover:bg-blue-100'}`}
+
+            >
+
+              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+
+            </button>
+
+            <a 
+
+              href="#contact" 
+
+              onClick={(e) => scrollToSection(e, 'contact')}
+
+              className={`hidden md:flex items-center gap-2 px-6 py-2 rounded-full font-bold text-sm text-white transition-all transform hover:-translate-y-1 hover:shadow-lg ${darkMode ? 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:shadow-blue-500/25' : 'bg-gradient-to-r from-blue-600 to-indigo-700 hover:shadow-blue-600/25'}`}
+
+            >
+
+              Get Started <ArrowRight size={16} />
+
+            </a>
+
+            {/* Mobile Menu Button */}
+
+            <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+
+              {mobileMenuOpen ? <X /> : <Menu />}
+
+            </button>
+
+          </div>
+
+        </div>
+
+        
+
+        {/* Mobile Menu */}
+
+        {mobileMenuOpen && (
+
+          <motion.div 
+
+            initial={{ height: 0, opacity: 0 }}
+
+            animate={{ height: 'auto', opacity: 1 }}
+
+            className={`md:hidden px-6 py-4 border-t ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-blue-100'}`}
+
+          >
+
+            <div className="flex flex-col gap-4">
+
+              {['Why Us', 'Technology', 'Sectors', 'Process'].map((item) => {
+
+                const id = item.toLowerCase().replace(' ', '-');
+
+                return (
+
+                  <a 
+
+                    key={item} 
+
+                    href={`#${id}`} 
+
+                    className="text-lg font-bold" 
+
+                    onClick={(e) => scrollToSection(e, id)}
+
+                  >
+
+                    {item}
+
+                  </a>
+
+                );
+
+              })}
+
+              <a 
+
+                href="#contact" 
+
+                className="text-blue-500 font-bold" 
+
+                onClick={(e) => scrollToSection(e, 'contact')}
+
+              >
+
+                Get Started
+
+              </a>
+
+            </div>
+
+          </motion.div>
+
+        )}
+
+      </nav>
+
+      {/* --- HERO SECTION --- */}
+
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+
+        {/* Animated Background Blobs */}
+
+        <div className={`absolute inset-0 transition-opacity duration-1000 ${darkMode ? 'opacity-30' : 'opacity-60'}`}>
+
+           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-[100px] animate-blob"></div>
+
+           <div className="absolute top-0 right-0 w-96 h-96 bg-sky-400 rounded-full mix-blend-multiply filter blur-[100px] animate-blob animation-delay-2000"></div>
+
+           <div className="absolute -bottom-32 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-[100px] animate-blob animation-delay-4000"></div>
+
+        </div>
+
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+
+          <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
+
+            <motion.div variants={fadeInUp} className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-8 border ${darkMode ? 'bg-slate-900/50 border-blue-500/30 text-blue-400' : 'bg-white/50 border-blue-500/30 text-blue-600'}`}>
+
+              <Star size={12} className="fill-current" />
+
+              Next Generation Workwear
+
+            </motion.div>
+
+            
+
+            <motion.h1 variants={fadeInUp} className={`text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.9] ${darkMode ? 'text-white' : 'text-blue-950'}`}>
+
+              ANTI-STAIN. <br/>
+
+              ANTI-ODOR. <br/>
+
+              <span className={`text-transparent bg-clip-text bg-gradient-to-r ${darkMode ? 'from-blue-400 via-sky-400 to-indigo-400' : 'from-blue-600 via-sky-600 to-indigo-600'}`}>
+
+                ECO-FRIENDLY.
+
+              </span>
+
+            </motion.h1>
+
+            
+
+            <motion.p variants={fadeInUp} className={`text-lg md:text-xl max-w-2xl mx-auto mb-12 font-medium ${darkMode ? 'text-slate-400' : 'text-blue-900/70'}`}>
+
+              High-performance uniforms designed to repel liquids, stay fresh for 12+ hours, and elevate your brand's perception at every touchpoint.
+
+            </motion.p>
+
+            
+
+            <motion.div variants={fadeInUp} className="flex flex-col md:flex-row gap-4 justify-center items-center">
+
+              <a 
+
+                href="#contact" 
+
+                onClick={(e) => scrollToSection(e, 'contact')}
+
+                className={`w-full md:w-auto px-8 py-4 rounded-full font-bold text-lg transition-all hover:scale-105 shadow-xl flex items-center justify-center gap-2 ${darkMode ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+
+              >
+
+                Audit Your Uniforms <ChevronRight size={18} />
+
+              </a>
+
+              <a 
+
+                href="#technology" 
+
+                onClick={(e) => scrollToSection(e, 'technology')}
+
+                className={`w-full md:w-auto px-8 py-4 rounded-full font-bold text-lg border hover:scale-105 transition-all ${darkMode ? 'border-slate-700 hover:border-slate-500 hover:bg-slate-800' : 'border-blue-200 hover:border-blue-300 hover:bg-white text-blue-900'}`}
+
+              >
+
+                Discover Technology
+
+              </a>
+
+            </motion.div>
+
+          </motion.div>
+
+        </div>
+
+        {/* Scroll Indicator */}
+
+        <motion.div 
+
+          animate={{ y: [0, 10, 0] }} 
+
+          transition={{ repeat: Infinity, duration: 2 }}
+
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-50"
+
+        >
+
+          <div className={`w-6 h-10 border-2 rounded-full flex justify-center pt-2 ${darkMode ? 'border-slate-500' : 'border-blue-300'}`}>
+
+            <div className={`w-1 h-2 rounded-full ${darkMode ? 'bg-slate-500' : 'bg-blue-400'}`}></div>
+
+          </div>
+
+        </motion.div>
+
+      </section>
+
+      {/* --- WHY IT MATTERS (Bento Grid) --- */}
+
+      <section id="why-us" className={`py-32 px-6 ${darkMode ? 'bg-slate-900/30' : 'bg-white'}`}>
+
+        <div className="max-w-7xl mx-auto">
+
+          <motion.div 
+
+            initial="hidden" 
+
+            whileInView="visible" 
+
+            viewport={{ once: true, margin: "-100px" }}
+
+            variants={fadeInUp}
+
+            className="mb-20 text-center"
+
+          >
+
+            <h2 className={`text-4xl md:text-6xl font-black mb-6 tracking-tight ${darkMode ? 'text-white' : 'text-blue-950'}`}>Why Uniforms Matter</h2>
+
+            <div className={`h-1.5 w-32 mx-auto rounded-full ${darkMode ? 'bg-blue-500' : 'bg-blue-600'}`}></div>
+
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            {[
+
+              { title: "Customer Perception", desc: "A professional appearance builds instant trust and satisfaction.", icon: <ShieldCheck className="w-12 h-12 mb-6"/>, color: "text-blue-500" },
+
+              { title: "Improved Service", desc: "Comfortable, clean uniforms lead to happier staff and better service.", icon: <Activity className="w-12 h-12 mb-6"/>, color: "text-indigo-500" },
+
+              { title: "Brand Impact", desc: "Your uniform is a walking billboard. Make it count every day.", icon: <Leaf className="w-12 h-12 mb-6"/>, color: "text-sky-500" },
+
+            ].map((item, index) => (
+
+              <motion.div 
+
+                key={index}
+
+                initial={{ opacity: 0, y: 30 }}
+
+                whileInView={{ opacity: 1, y: 0 }}
+
+                viewport={{ once: true }}
+
+                transition={{ delay: index * 0.1 }}
+
+                whileHover={{ y: -10 }}
+
+                className={`p-10 rounded-[2rem] border backdrop-blur-sm transition-all group ${
+
+                  darkMode 
+
+                    ? 'bg-slate-800/40 border-slate-700/50 hover:bg-slate-800/80 hover:border-blue-500/30' 
+
+                    : 'bg-blue-50/50 border-blue-100 hover:shadow-xl hover:border-blue-200 hover:bg-white'
+
+                }`}
+
+              >
+
+                <div className={`${item.color} transform group-hover:scale-110 transition-transform duration-300`}>{item.icon}</div>
+
+                <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-blue-900'}`}>{item.title}</h3>
+
+                <p className={`text-lg leading-relaxed ${darkMode ? 'text-slate-400' : 'text-blue-900/70'}`}>{item.desc}</p>
+
+              </motion.div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* --- UNMATCHED TECH (WITH CAROUSEL) --- */}
+
+      <section id="technology" className={`py-32 px-6 overflow-hidden relative ${darkMode ? 'bg-slate-950' : 'bg-blue-50/30'}`}>
+
+        {/* Tech Background Pattern */}
+
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, ${darkMode ? '#3b82f6' : '#2563eb'} 1px, transparent 0)`, backgroundSize: '40px 40px' }}></div>
+
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
+
+          <motion.div 
+
+             initial={{ opacity: 0, x: -50 }}
+
+             whileInView={{ opacity: 1, x: 0 }}
+
+             viewport={{ once: true }}
+
+          >
+
+            <div className={`inline-block px-3 py-1 rounded mb-6 text-sm font-bold uppercase ${darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-700'}`}>
+
+              Proprietary Tech
+
+            </div>
+
+            <h2 className={`text-5xl md:text-7xl font-black mb-8 leading-none ${darkMode ? 'text-white' : 'text-blue-950'}`}>
+
+              UNMATCHED <br/><span className={darkMode ? "text-blue-400" : "text-blue-600"}>PERFORMANCE</span>
+
+            </h2>
+
+            <p className={`text-xl mb-12 ${darkMode ? 'text-slate-400' : 'text-blue-900/70'}`}>
+
+              We don't just make clothes; we engineer performance. Our finishes are certified by accredited third-party labs to ensure durability and safety.
+
+            </p>
+
+            
+
+            <div className="grid gap-6">
+
+              {[
+
+                { label: "Anti-Stain", desc: "Repels coffee, tea, juices, and sauces instantly.", icon: <Droplets /> },
+
+                { label: "Anti-Odor", desc: "Keeps staff fresh for 12+ hour shifts.", icon: <Wind /> },
+
+                { label: "Easy Care", desc: "Quick-dry, easy iron, significantly reducing maintenance.", icon: <Leaf /> }
+
+              ].map((feat, i) => (
+
+                <div key={i} className={`flex items-start gap-6 p-6 rounded-2xl transition-colors ${darkMode ? 'hover:bg-slate-900/80' : 'hover:bg-white hover:shadow-lg hover:shadow-blue-900/5'}`}>
+
+                  <div className={`p-4 rounded-xl shrink-0 ${darkMode ? 'bg-slate-800 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.15)]' : 'bg-blue-100 text-blue-700'}`}>
+
+                    {feat.icon}
+
+                  </div>
+
+                  <div>
+
+                    <h4 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-blue-900'}`}>{feat.label}</h4>
+
+                    <p className={`text-base ${darkMode ? 'text-slate-500' : 'text-blue-900/60'}`}>{feat.desc}</p>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          </motion.div>
+
+          <motion.div 
+
+             initial={{ opacity: 0, scale: 0.9 }}
+
+             whileInView={{ opacity: 1, scale: 1 }}
+
+             viewport={{ once: true }}
+
+             className="relative"
+
+          >
+
+             {/* Main Image Container with Carousel */}
+
+             <div className={`relative h-[700px] rounded-[3rem] overflow-hidden shadow-2xl ${darkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-blue-100'}`}>
+
+                <AnimatePresence mode='wait'>
+
+                  <motion.img 
+
+                    key={currentTechImage}
+
+                    src={techImages[currentTechImage]} 
+
+                    initial={{ opacity: 0, scale: 1.1 }}
+
+                    animate={{ opacity: 0.6, scale: 1 }}
+
+                    exit={{ opacity: 0 }}
+
+                    transition={{ duration: 1 }}
+
+                    alt="Fabric Detail" 
+
+                    className="absolute inset-0 w-full h-full object-cover"
+
+                  />
+
+                </AnimatePresence>
+
+                <div className={`absolute inset-0 bg-gradient-to-t ${darkMode ? 'from-slate-950 via-transparent to-transparent' : 'from-blue-50/50 via-transparent to-transparent'}`}></div>
+
+                
+
+                {/* Floating Badge */}
+
+                <div className="absolute bottom-10 left-10 right-10">
+
+                  <div className={`p-8 backdrop-blur-xl rounded-3xl border ${darkMode ? 'bg-slate-900/60 border-slate-700/50' : 'bg-white/80 border-white/50 shadow-lg'}`}>
+
+                    <div className="flex items-end gap-4">
+
+                       <span className={`text-6xl font-black ${darkMode ? 'text-blue-500' : 'text-blue-600'}`}>50+</span>
+
+                       <span className={`text-sm font-bold uppercase tracking-widest pb-4 opacity-70 ${darkMode ? 'text-white' : 'text-blue-900'}`}>Years of <br/>Innovation</span>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* Carousel Indicators */}
+
+                <div className="absolute bottom-14 right-14 flex gap-2 z-20">
+
+                  {techImages.map((_, idx) => (
+
+                    <div 
+
+                      key={idx} 
+
+                      className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentTechImage ? 'w-8 bg-blue-600' : 'w-2 bg-blue-300/50'}`} 
+
+                    />
+
+                  ))}
+
+                </div>
+
+             </div>
+
+             
+
+             {/* Decorative Elements */}
+
+             <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+
+          </motion.div>
+
+        </div>
+
+      </section>
+
+      {/* --- SECTORS (WITH MODALS) --- */}
+
+      <section id="sectors" className={`py-32 px-6 ${darkMode ? 'bg-slate-950' : 'bg-white'}`}>
+
+        <div className="max-w-7xl mx-auto">
+
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+
+            <div>
+
+              <h2 className={`text-4xl md:text-6xl font-black mb-4 ${darkMode ? 'text-white' : 'text-blue-950'}`}>Sectors We Serve</h2>
+
+              <p className={`text-xl max-w-xl ${darkMode ? 'text-slate-500' : 'text-blue-900/60'}`}>Tailored solutions for industries where appearance and performance are critical.</p>
+
+            </div>
+
+            <button 
+
+              onClick={() => setActiveSectorIndex(0)} 
+
+              className={`hidden md:block px-6 py-3 rounded-full border font-bold transition-all ${darkMode ? 'border-slate-700 text-white hover:bg-blue-500 hover:border-blue-500' : 'border-blue-200 text-blue-900 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:shadow-lg'}`}
+
+            >
+
+              View Full Catalog
+
+            </button>
+
+          </div>
+
+          
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            {sectorsData.map((sector, idx) => (
+
+              <motion.div 
+
+                key={idx}
+
+                whileHover={{ y: -10 }}
+
+                onClick={() => setActiveSectorIndex(idx)}
+
+                className="group relative h-[500px] rounded-[2rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300"
+
+              >
+
+                <div className={`absolute inset-0 bg-gradient-to-t ${darkMode ? 'from-slate-900/90 via-slate-900/20' : 'from-blue-950/90 via-blue-900/20'} to-transparent z-10`}></div>
+
+                <img 
+
+                  src={sector.img} 
+
+                  alt={sector.name} 
+
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+
+                />
+
+                <div className="absolute bottom-0 left-0 p-10 z-20 w-full transform transition-transform duration-500 group-hover:-translate-y-4">
+
+                  <h3 className="text-4xl font-black text-white mb-3">{sector.name}</h3>
+
+                  <p className="text-blue-100 text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-4 group-hover:translate-y-0">
+
+                    {sector.short}
+
+                  </p>
+
+                  <div className={`mt-6 w-12 h-12 rounded-full flex items-center justify-center ${darkMode ? 'bg-blue-500 text-white' : 'bg-white text-blue-900'}`}>
+
+                    <ArrowRight size={20} />
+
+                  </div>
+
+                </div>
+
+              </motion.div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* --- NAVIGABLE MODAL CAROUSEL --- */}
+
+      <AnimatePresence>
+
+        {activeSectorIndex !== null && (
+
+          <motion.div 
+
+            initial={{ opacity: 0 }} 
+
+            animate={{ opacity: 1 }} 
+
+            exit={{ opacity: 0 }}
+
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+
+            onClick={() => setActiveSectorIndex(null)}
+
+          >
+
+            <div className="relative w-full max-w-5xl">
+
+              
+
+              {/* Previous Button */}
+
+              <button 
+
+                onClick={prevSector}
+
+                className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-20 p-3 rounded-full transition-all ${darkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-white text-blue-900 hover:bg-blue-50 shadow-lg'}`}
+
+              >
+
+                <ChevronLeft size={24} />
+
+              </button>
+
+              {/* Next Button */}
+
+              <button 
+
+                onClick={nextSector}
+
+                className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-20 p-3 rounded-full transition-all ${darkMode ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-white text-blue-900 hover:bg-blue-50 shadow-lg'}`}
+
+              >
+
+                <ChevronRight size={24} />
+
+              </button>
+
+              <motion.div 
+
+                key={activeSectorIndex}
+
+                initial={{ scale: 0.95, opacity: 0, x: 20 }} 
+
+                animate={{ scale: 1, opacity: 1, x: 0 }} 
+
+                exit={{ scale: 0.95, opacity: 0, x: -20 }}
+
+                transition={{ duration: 0.3 }}
+
+                onClick={(e) => e.stopPropagation()}
+
+                className={`relative w-full rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-[80vh] md:h-[600px] ${darkMode ? 'bg-slate-900' : 'bg-white'}`}
+
+              >
+
+                <button 
+
+                  onClick={() => setActiveSectorIndex(null)}
+
+                  className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/20 hover:bg-black/40 text-white backdrop-blur-md transition-colors"
+
+                >
+
+                  <X size={20} />
+
+                </button>
+
+                {/* Image Side */}
+
+                <div className="w-full md:w-1/2 h-1/3 md:h-full relative">
+
+                  <img src={sectorsData[activeSectorIndex].img} alt={sectorsData[activeSectorIndex].name} className="absolute inset-0 w-full h-full object-cover" />
+
+                  <div className="absolute inset-0 bg-blue-900/20 mix-blend-multiply"></div>
+
+                  {/* Badge */}
+
+                  <div className="absolute top-6 left-6 px-4 py-2 bg-white/90 backdrop-blur rounded-full text-xs font-bold uppercase tracking-widest text-blue-900 shadow-lg">
+
+                    Sector {activeSectorIndex + 1} / {sectorsData.length}
+
+                  </div>
+
+                </div>
+
+                {/* Content Side */}
+
+                <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center overflow-y-auto">
+
+                  <h3 className={`text-4xl font-black mb-4 ${darkMode ? 'text-white' : 'text-blue-950'}`}>{sectorsData[activeSectorIndex].name}</h3>
+
+                  <p className={`text-lg mb-8 leading-relaxed ${darkMode ? 'text-slate-300' : 'text-blue-900/70'}`}>
+
+                    {sectorsData[activeSectorIndex].description}
+
+                  </p>
+
+                  <div className="space-y-4">
+
+                    {sectorsData[activeSectorIndex].features.map((feature, i) => (
+
+                      <div key={i} className="flex items-center gap-3">
+
+                        <CheckCircle2 className={`w-6 h-6 flex-shrink-0 ${darkMode ? 'text-blue-500' : 'text-blue-600'}`} />
+
+                        <span className={`font-semibold ${darkMode ? 'text-slate-200' : 'text-blue-900'}`}>{feature}</span>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+              </motion.div>
+
+              {/* Pagination Dots */}
+
+              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
+
+                {sectorsData.map((_, idx) => (
+
+                  <button
+
+                    key={idx}
+
+                    onClick={(e) => { e.stopPropagation(); setActiveSectorIndex(idx); }}
+
+                    className={`h-2 rounded-full transition-all ${idx === activeSectorIndex ? 'w-8 bg-blue-500' : 'w-2 bg-slate-500/50'}`}
+
+                  />
+
+                ))}
+
+              </div>
+
+            </div>
+
+          </motion.div>
+
+        )}
+
+      </AnimatePresence>
+
+      {/* --- 3 STEP PROCESS --- */}
+
+      <section id="process" className={`py-32 px-6 border-y ${darkMode ? 'bg-slate-900/50 border-slate-800' : 'bg-blue-50/30 border-blue-100'}`}>
+
+        <div className="max-w-7xl mx-auto">
+
+          <div className="text-center mb-20">
+
+             <h2 className={`text-4xl font-bold ${darkMode ? 'text-white' : 'text-blue-950'}`}>Design-to-Delivery</h2>
+
+             <p className={`mt-4 ${darkMode ? 'text-slate-500' : 'text-blue-900/60'}`}>A simplified process to get your team fitted.</p>
+
+          </div>
+
+          
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+
+            {/* Connecting Line (Desktop) */}
+
+            <div className={`hidden md:block absolute top-16 left-[16%] right-[16%] h-0.5 z-0 ${darkMode ? 'bg-slate-800' : 'bg-blue-100'}`}></div>
+
+            
+
+            {[
+
+              { step: "01", title: "Consultation", desc: "Free 30-60 min uniform audit." },
+
+              { step: "02", title: "Customization", desc: "Designs aligned with brand identity." },
+
+              { step: "03", title: "Implementation", desc: "Timely, high-quality delivery." }
+
+            ].map((item, i) => (
+
+              <div key={i} className="relative z-10 text-center group">
+
+                <div className={`w-32 h-32 mx-auto rounded-full flex items-center justify-center text-4xl font-black mb-8 border-[6px] transition-transform duration-300 group-hover:scale-110 shadow-xl ${darkMode ? 'bg-slate-950 border-slate-800 text-blue-500 group-hover:border-blue-500' : 'bg-white border-blue-100 text-blue-600 group-hover:border-blue-200'}`}>
+
+                  {item.step}
+
+                </div>
+
+                <h3 className={`text-2xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-blue-950'}`}>{item.title}</h3>
+
+                <p className={`max-w-xs mx-auto ${darkMode ? 'text-slate-500' : 'text-blue-900/60'}`}>{item.desc}</p>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* --- CONTACT / FOOTER --- */}
+
+      <section id="contact" className={`py-32 px-6 ${darkMode ? 'bg-gradient-to-t from-slate-950 to-slate-900' : 'bg-blue-950 text-white'}`}>
+
+        <div className="max-w-5xl mx-auto text-center">
+
+          <motion.div
+
+            initial={{ opacity: 0, scale: 0.95 }}
+
+            whileInView={{ opacity: 1, scale: 1 }}
+
+            viewport={{ once: true }}
+
+            className={`p-8 md:p-16 rounded-[3rem] relative overflow-hidden ${darkMode ? 'bg-slate-800/30 border border-slate-700 shadow-2xl' : 'bg-white/10 border border-white/10'}`}
+
+          >
+
+            {/* Glossy Overlay */}
+
+            <div className="absolute -inset-full top-0 block h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-10 left-full animate-shine" />
+
+            <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">Ready to <span className={darkMode ? 'text-blue-400' : 'text-blue-400'}>Transform?</span></h2>
+
+            <p className="text-xl opacity-80 mb-12 max-w-2xl mx-auto">
+
+              Let's create the next generation of workwear for your team. Fill out the form or reach us directly.
+
+            </p>
+
+            
+
+            <form className="max-w-xl mx-auto space-y-4 text-left">
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                 <div className="space-y-1">
+
+                   <label className="text-xs font-bold uppercase tracking-widest opacity-70 ml-2">Name</label>
+
+                   <input type="text" placeholder="John Doe" className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 transition-all ${darkMode ? 'bg-slate-900/50 border-slate-600 focus:border-blue-500 focus:ring-blue-500/20' : 'bg-white/10 border-white/20 focus:border-blue-400 focus:ring-blue-400/20 placeholder-gray-400'}`} />
+
+                 </div>
+
+                 <div className="space-y-1">
+
+                   <label className="text-xs font-bold uppercase tracking-widest opacity-70 ml-2">Email</label>
+
+                   <input type="email" placeholder="vineesh@nanofutr.com" className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 transition-all ${darkMode ? 'bg-slate-900/50 border-slate-600 focus:border-blue-500 focus:ring-blue-500/20' : 'bg-white/10 border-white/20 focus:border-blue-400 focus:ring-blue-400/20 placeholder-gray-400'}`} />
+
+                 </div>
+
+              </div>
+
+              
+
+              <div className="space-y-1">
+
+                <label className="text-xs font-bold uppercase tracking-widest opacity-70 ml-2">Message</label>
+
+                <textarea rows="4" placeholder="Tell us about your team..." className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 transition-all ${darkMode ? 'bg-slate-900/50 border-slate-600 focus:border-blue-500 focus:ring-blue-500/20' : 'bg-white/10 border-white/20 focus:border-blue-400 focus:ring-blue-400/20 placeholder-gray-400'}`}></textarea>
+
+              </div>
+
+              <button className={`w-full py-5 rounded-xl font-bold text-lg transition-all hover:scale-[1.02] active:scale-[0.98] ${darkMode ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-[0_0_30px_rgba(59,130,246,0.4)]' : 'bg-white text-blue-950 hover:bg-gray-100'}`}>
+
+                Start Conversation
+
+              </button>
+
+            </form>
+
+            <div className="mt-16 pt-12 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm opacity-60">
+
+              <div className="text-left space-y-2">
+
+                <p className="flex items-center gap-2"><span className="w-2 h-2 bg-green-500 rounded-full animate-pulse block"></span> +91 9886104356</p>
+
+                <p>vineesh@nanofutr.com</p>
+
+              </div>
+
+              <div className="text-left md:text-right">
+
+                <p>© 2025 NanoFutr.</p>
+
+                <p>Designed with liquid intelligence.</p>
+
+              </div>
+
+            </div>
+
+          </motion.div>
+
+        </div>
+
+      </section>
+
+      {/* CSS for custom gradient blob animation */}
+
+      <style>{`
+
+        @keyframes blob {
+
+          0% { transform: translate(0px, 0px) scale(1); }
+
+          33% { transform: translate(30px, -50px) scale(1.1); }
+
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+
+          100% { transform: translate(0px, 0px) scale(1); }
+
+        }
+
+        .animate-blob {
+
+          animation: blob 10s infinite;
+
+        }
+
+        .animation-delay-2000 {
+
+          animation-delay: 2s;
+
+        }
+
+        .animation-delay-4000 {
+
+          animation-delay: 4s;
+
+        }
+
+        @keyframes shine {
+
+          100% {
+
+            left: 125%;
+
+          }
+
+        }
+
+        .animate-shine {
+
+          animation: shine 3s infinite;
+
+        }
+
+      `}</style>
+
+    </div>
+
+  );
+
+};
+
+export default NanoFutr;
+
