@@ -184,43 +184,43 @@ const NanoFutr = () => {
 
     { 
 
-      name: "Retail", 
+      name: "Work Wear", 
 
-      img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000", 
+      img: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&q=80&w=1000", 
 
-      short: "From high-end boutiques to service stations.",
+      short: "Professional uniforms for industrial and service environments.",
 
-      description: "From high-end boutiques to service stations, we deliver uniforms that reflect your brand's quality.",
+      description: "Durable, high-performance workwear designed for demanding industrial and service environments. Built to withstand the toughest conditions while maintaining professional appearance.",
 
-      features: ["Stain-resistant for coffee shops & food retail", "Breathable fabrics for active floor staff", "Custom branding options"]
-
-    },
-
-    { 
-
-      name: "Hospitality", 
-
-      img: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000", 
-
-      short: "Hotels, restaurants, cafes, and quick-service chains.",
-
-      description: "We provide durable and stylish uniforms for hotels, restaurants, cafes, and quick-service chains.",
-
-      features: ["Odor-control for long shifts", "Easy-iron technology", "Elegant cuts for front-of-house staff"]
+      features: ["Stain and water-resistant technology", "Durable construction for long-lasting wear", "Comfortable fit for extended shifts"]
 
     },
 
     { 
 
-      name: "Healthcare", 
+      name: "Corporate Gear", 
 
-      img: "https://images.unsplash.com/photo-1516574187841-693083f7e74f?auto=format&fit=crop&q=80&w=1000", 
+      img: "https://images.unsplash.com/photo-1556155092-8707de31f9c4?auto=format&fit=crop&q=80&w=1000", 
 
-      short: "Hospitals, clinics, and laboratories.",
+      short: "Elegant corporate uniforms and business attire.",
 
-      description: "Specialized, high-performance scrubs and lab coats for hospitals, clinics, and laboratories.",
+      description: "Sophisticated corporate uniforms that elevate your brand image. Professional attire designed for office environments, client meetings, and corporate settings.",
 
-      features: ["Antimicrobial fabric technology", "Fluid repellent barrier", "Maximum mobility design"]
+      features: ["Premium fabric quality", "Wrinkle-resistant and easy care", "Customizable to match brand identity"]
+
+    },
+
+    { 
+
+      name: "Active Wear", 
+
+      img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=1000", 
+
+      short: "Performance-driven activewear for dynamic work environments.",
+
+      description: "High-performance activewear engineered for movement and comfort. Perfect for fitness facilities, outdoor work, and any environment requiring flexibility and breathability.",
+
+      features: ["Moisture-wicking technology", "Stretch fabrics for maximum mobility", "UV protection and quick-dry materials"]
 
     },
 
@@ -254,7 +254,7 @@ const NanoFutr = () => {
 
           <div className="hidden md:flex items-center gap-10">
 
-            {['Why Us', 'Technology', 'Sectors', 'Process'].map((item) => {
+            {['Why Us', 'Technology', 'Solutions', 'Process'].map((item) => {
 
               const id = item.toLowerCase().replace(' ', '-');
 
@@ -340,7 +340,7 @@ const NanoFutr = () => {
 
             <div className="flex flex-col gap-4">
 
-              {['Why Us', 'Technology', 'Sectors', 'Process'].map((item) => {
+              {['Why Us', 'Technology', 'Solutions', 'Process'].map((item) => {
 
                 const id = item.toLowerCase().replace(' ', '-');
 
@@ -488,15 +488,15 @@ const NanoFutr = () => {
 
               <a 
 
-                href="#contact" 
+                href="#solutions" 
 
-                onClick={(e) => scrollToSection(e, 'contact')}
+                onClick={(e) => scrollToSection(e, 'solutions')}
 
                 className={`w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-base transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg flex items-center justify-center gap-2 ${darkMode ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
 
               >
 
-                Audit Your Uniforms <ChevronRight size={16} />
+                Our Solutions <ChevronRight size={16} />
 
               </a>
 
@@ -1028,9 +1028,9 @@ const NanoFutr = () => {
 
       </section>
 
-      {/* --- SECTORS (WITH MODALS) --- */}
+      {/* --- SOLUTIONS (WITH MODALS) --- */}
 
-      <section id="sectors" className={`py-32 px-6 ${darkMode ? 'bg-slate-950' : 'bg-white'}`}>
+      <section id="solutions" className={`py-32 px-6 ${darkMode ? 'bg-slate-950' : 'bg-white'}`}>
 
         <div className="max-w-7xl mx-auto">
 
@@ -1038,7 +1038,7 @@ const NanoFutr = () => {
 
             <div>
 
-              <h2 className={`text-4xl md:text-6xl font-black mb-4 ${darkMode ? 'text-white' : 'text-blue-950'}`}>Sectors We Serve</h2>
+              <h2 className={`text-4xl md:text-6xl font-black mb-4 ${darkMode ? 'text-white' : 'text-blue-950'}`}>Our Solutions</h2>
 
               <p className={`text-xl max-w-xl ${darkMode ? 'text-slate-500' : 'text-blue-900/60'}`}>Tailored solutions for industries where appearance and performance are critical.</p>
 
