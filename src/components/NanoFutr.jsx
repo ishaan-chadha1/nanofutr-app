@@ -46,6 +46,26 @@ const NanoFutr = () => {
 
   ];
 
+  // Hero Feature Words Carousel
+
+  const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
+
+  const featureWords = [
+
+    "anti stain",
+
+    "anti odor",
+
+    "uv\u00A0protection",
+
+    "eco friendly",
+
+    "wicking",
+
+    "coolant"
+
+  ];
+
   // Carousel Logic for Tech Section
 
   useEffect(() => {
@@ -59,6 +79,20 @@ const NanoFutr = () => {
     return () => clearInterval(timer);
 
   }, []);
+
+  // Hero Feature Words Carousel Logic
+
+  useEffect(() => {
+
+    const timer = setInterval(() => {
+
+      setCurrentFeatureIndex((prev) => (prev + 1) % featureWords.length);
+
+    }, 2000);
+
+    return () => clearInterval(timer);
+
+  }, [featureWords.length]);
 
   // Handle scroll for navbar transparency
 
@@ -374,9 +408,9 @@ const NanoFutr = () => {
 
           <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
 
-            <motion.div variants={fadeInUp} className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-8 border ${darkMode ? 'bg-slate-900/50 border-blue-500/30 text-blue-400' : 'bg-white/50 border-blue-500/30 text-blue-600'}`}>
+            <motion.div variants={fadeInUp} className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest mb-12 backdrop-blur-sm ${darkMode ? 'bg-slate-900/40 border border-slate-700/50 text-blue-400' : 'bg-white/60 border border-blue-200/50 text-blue-700'}`}>
 
-              <Star size={12} className="fill-current" />
+              <Star size={11} className="fill-current" />
 
               Next Generation Workwear
 
@@ -384,15 +418,17 @@ const NanoFutr = () => {
 
             
 
-            <motion.h1 variants={fadeInUp} className={`text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.9] ${darkMode ? 'text-white' : 'text-blue-950'}`}>
+            <motion.h1 variants={fadeInUp} className={`mb-8 leading-[1.05] ${darkMode ? 'text-white' : 'text-blue-950'}`}>
 
-              ANTI-STAIN. <br/>
+              <span className="block text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-2">
 
-              ANTI-ODOR. <br/>
+                BRAND FOOTPRINT
 
-              <span className={`text-transparent bg-clip-text bg-gradient-to-r ${darkMode ? 'from-blue-400 via-sky-400 to-indigo-400' : 'from-blue-600 via-sky-600 to-indigo-600'}`}>
+              </span>
 
-                ECO-FRIENDLY.
+              <span className="block text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight opacity-80">
+
+                Performance Wear
 
               </span>
 
@@ -400,7 +436,47 @@ const NanoFutr = () => {
 
             
 
-            <motion.p variants={fadeInUp} className={`text-lg md:text-xl max-w-2xl mx-auto mb-12 font-medium ${darkMode ? 'text-slate-400' : 'text-blue-900/70'}`}>
+            {/* Vertical Carousel for Feature Words */}
+
+            <motion.div variants={fadeInUp} className="relative h-24 md:h-32 mb-12 flex items-center justify-center overflow-hidden">
+
+              <div className="relative w-full flex items-center justify-center">
+
+                <AnimatePresence mode="wait">
+
+                  <motion.div
+
+                    key={currentFeatureIndex}
+
+                    initial={{ opacity: 0, y: 60, scale: 0.9 }}
+
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+
+                    exit={{ opacity: 0, y: -60, scale: 0.9 }}
+
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+
+                    className="absolute"
+
+                  >
+
+                    <span className={`text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter whitespace-nowrap ${darkMode ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-400 to-indigo-400' : 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-sky-600 to-indigo-600'}`}>
+
+                      {featureWords[currentFeatureIndex]}
+
+                    </span>
+
+                  </motion.div>
+
+                </AnimatePresence>
+
+              </div>
+
+            </motion.div>
+
+            
+
+            <motion.p variants={fadeInUp} className={`text-base md:text-lg max-w-2xl mx-auto mb-16 font-normal leading-relaxed ${darkMode ? 'text-slate-300' : 'text-blue-900/60'}`}>
 
               High-performance uniforms designed to repel liquids, stay fresh for 12+ hours, and elevate your brand's perception at every touchpoint.
 
@@ -408,7 +484,7 @@ const NanoFutr = () => {
 
             
 
-            <motion.div variants={fadeInUp} className="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
 
               <a 
 
@@ -416,11 +492,11 @@ const NanoFutr = () => {
 
                 onClick={(e) => scrollToSection(e, 'contact')}
 
-                className={`w-full md:w-auto px-8 py-4 rounded-full font-bold text-lg transition-all hover:scale-105 shadow-xl flex items-center justify-center gap-2 ${darkMode ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+                className={`w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-base transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg flex items-center justify-center gap-2 ${darkMode ? 'bg-white text-blue-900 hover:bg-blue-50' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
 
               >
 
-                Audit Your Uniforms <ChevronRight size={18} />
+                Audit Your Uniforms <ChevronRight size={16} />
 
               </a>
 
@@ -430,7 +506,7 @@ const NanoFutr = () => {
 
                 onClick={(e) => scrollToSection(e, 'technology')}
 
-                className={`w-full md:w-auto px-8 py-4 rounded-full font-bold text-lg border hover:scale-105 transition-all ${darkMode ? 'border-slate-700 hover:border-slate-500 hover:bg-slate-800' : 'border-blue-200 hover:border-blue-300 hover:bg-white text-blue-900'}`}
+                className={`w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-base border-2 hover:scale-[1.02] active:scale-[0.98] transition-all ${darkMode ? 'border-slate-600 hover:border-slate-500 hover:bg-slate-800/50 text-white' : 'border-blue-300 hover:border-blue-400 hover:bg-blue-50 text-blue-900'}`}
 
               >
 
