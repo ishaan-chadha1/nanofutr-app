@@ -10,7 +10,9 @@ import {
 
   ChevronRight, ChevronLeft, Star, CheckCircle2, 
 
-  Palette, Users, Package, Award, TrendingDown, DollarSign, Sparkles
+  Palette, Users, Package, Award, TrendingDown, DollarSign, Sparkles,
+
+  Thermometer, Waves
 
 } from 'lucide-react';
 
@@ -254,7 +256,7 @@ const NanoFutr = () => {
 
           <div className="hidden md:flex items-center gap-10">
 
-            {['Why Us', 'Technology', 'Solutions', 'Process'].map((item) => {
+            {['Technology', 'Why Us', 'Solutions', 'Process'].map((item) => {
 
               const id = item.toLowerCase().replace(' ', '-');
 
@@ -340,7 +342,7 @@ const NanoFutr = () => {
 
             <div className="flex flex-col gap-4">
 
-              {['Why Us', 'Technology', 'Solutions', 'Process'].map((item) => {
+              {['Technology', 'Why Us', 'Solutions', 'Process'].map((item) => {
 
                 const id = item.toLowerCase().replace(' ', '-');
 
@@ -542,6 +544,184 @@ const NanoFutr = () => {
 
       </section>
 
+      {/* --- UNMATCHED TECH (WITH CAROUSEL) --- */}
+
+      <section id="technology" className={`py-32 px-6 overflow-hidden relative ${darkMode ? 'bg-slate-950' : 'bg-blue-50/30'}`}>
+
+        {/* Tech Background Pattern */}
+
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, ${darkMode ? '#3b82f6' : '#2563eb'} 1px, transparent 0)`, backgroundSize: '40px 40px' }}></div>
+
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
+
+          <motion.div 
+
+             initial={{ opacity: 0, x: -50 }}
+
+             whileInView={{ opacity: 1, x: 0 }}
+
+             viewport={{ once: true }}
+
+          >
+
+            <div className={`inline-block px-3 py-1 rounded mb-6 text-sm font-bold uppercase ${darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-700'}`}>
+
+              Proprietary Tech
+
+            </div>
+
+            <h2 className={`text-5xl md:text-7xl font-black mb-8 leading-none ${darkMode ? 'text-white' : 'text-blue-950'}`}>
+
+              UNMATCHED <br/><span className={darkMode ? "text-blue-400" : "text-blue-600"}>PERFORMANCE</span>
+
+            </h2>
+
+            <p className={`text-xl mb-12 ${darkMode ? 'text-slate-400' : 'text-blue-900/70'}`}>
+
+              We don't just make clothes; we engineer performance. Our finishes are certified by accredited third-party labs to ensure durability and safety.
+
+            </p>
+
+            
+
+            <div className="grid gap-6">
+
+              {[
+
+                { label: "Anti-Stain Technology", desc: "Repels liquids like coffee, tea, juices, and sauces.", icon: <Droplets /> },
+
+                { label: "Anti-Odor Finish", desc: "Garments remain fresh for over 12-hour shifts.", icon: <Wind /> },
+
+                { label: "Moisture-Wicking", desc: "Advanced wicking technology keeps you dry and comfortable.", icon: <Waves /> },
+
+                { label: "Cooling Technology", desc: "Temperature-regulating fabrics for optimal comfort.", icon: <Thermometer /> },
+
+                { label: "UV Protection", desc: "Built-in UV protection to shield against harmful sun rays.", icon: <Sun /> },
+
+                { label: "Easy Care", desc: "Quick-drying, easy to clean and iron, reducing maintenance.", icon: <Leaf /> },
+
+                { label: "Certified Performance", desc: "Finishes certified by accredited third-party labs.", icon: <Award /> }
+
+              ].map((feat, i) => (
+
+                <div key={i} className={`flex items-start gap-6 p-6 rounded-2xl transition-colors ${darkMode ? 'hover:bg-slate-900/80' : 'hover:bg-white hover:shadow-lg hover:shadow-blue-900/5'}`}>
+
+                  <div className={`p-4 rounded-xl shrink-0 ${darkMode ? 'bg-slate-800 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.15)]' : 'bg-blue-100 text-blue-700'}`}>
+
+                    {feat.icon}
+
+                  </div>
+
+                  <div>
+
+                    <h4 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-blue-900'}`}>{feat.label}</h4>
+
+                    <p className={`text-base ${darkMode ? 'text-slate-500' : 'text-blue-900/60'}`}>{feat.desc}</p>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          </motion.div>
+
+          <motion.div 
+
+             initial={{ opacity: 0, scale: 0.9 }}
+
+             whileInView={{ opacity: 1, scale: 1 }}
+
+             viewport={{ once: true }}
+
+             className="relative"
+
+          >
+
+             {/* Main Image Container with Carousel */}
+
+             <div className={`relative h-[700px] rounded-[3rem] overflow-hidden shadow-2xl ${darkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-blue-100'}`}>
+
+                <AnimatePresence mode='wait'>
+
+                  <motion.img 
+
+                    key={currentTechImage}
+
+                    src={techImages[currentTechImage]} 
+
+                    initial={{ opacity: 0, scale: 1.1 }}
+
+                    animate={{ opacity: 0.6, scale: 1 }}
+
+                    exit={{ opacity: 0 }}
+
+                    transition={{ duration: 1 }}
+
+                    alt="Fabric Detail" 
+
+                    className="absolute inset-0 w-full h-full object-cover"
+
+                  />
+
+                </AnimatePresence>
+
+                <div className={`absolute inset-0 bg-gradient-to-t ${darkMode ? 'from-slate-950 via-transparent to-transparent' : 'from-blue-50/50 via-transparent to-transparent'}`}></div>
+
+                
+
+                {/* Floating Badge */}
+
+                <div className="absolute bottom-10 left-10 right-10">
+
+                  <div className={`p-8 backdrop-blur-xl rounded-3xl border ${darkMode ? 'bg-slate-900/60 border-slate-700/50' : 'bg-white/80 border-white/50 shadow-lg'}`}>
+
+                    <div className="flex items-end gap-4">
+
+                       <span className={`text-6xl font-black ${darkMode ? 'text-blue-500' : 'text-blue-600'}`}>50+</span>
+
+                       <span className={`text-sm font-bold uppercase tracking-widest pb-4 opacity-70 ${darkMode ? 'text-white' : 'text-blue-900'}`}>Years of <br/>Innovation</span>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* Carousel Indicators */}
+
+                <div className="absolute bottom-14 right-14 flex gap-2 z-20">
+
+                  {techImages.map((_, idx) => (
+
+                    <div 
+
+                      key={idx} 
+
+                      className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentTechImage ? 'w-8 bg-blue-600' : 'w-2 bg-blue-300/50'}`} 
+
+                    />
+
+                  ))}
+
+                </div>
+
+             </div>
+
+             
+
+             {/* Decorative Elements */}
+
+             <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+
+          </motion.div>
+
+        </div>
+
+      </section>
+
       {/* --- WHY IT MATTERS (Bento Grid) --- */}
 
       <section id="why-us" className={`py-32 px-6 ${darkMode ? 'bg-slate-900/30' : 'bg-white'}`}>
@@ -562,7 +742,7 @@ const NanoFutr = () => {
 
           >
 
-            <h2 className={`text-4xl md:text-6xl font-black mb-6 tracking-tight ${darkMode ? 'text-white' : 'text-blue-950'}`}>Why Uniforms Matter</h2>
+            <h2 className={`text-4xl md:text-6xl font-black mb-6 tracking-tight ${darkMode ? 'text-white' : 'text-blue-950'}`}>Why Workwear Matters</h2>
 
             <div className={`h-1.5 w-32 mx-auto rounded-full ${darkMode ? 'bg-blue-500' : 'bg-blue-600'}`}></div>
 
@@ -739,180 +919,6 @@ const NanoFutr = () => {
             ))}
 
           </div>
-
-        </div>
-
-      </section>
-
-      {/* --- UNMATCHED TECH (WITH CAROUSEL) --- */}
-
-      <section id="technology" className={`py-32 px-6 overflow-hidden relative ${darkMode ? 'bg-slate-950' : 'bg-blue-50/30'}`}>
-
-        {/* Tech Background Pattern */}
-
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, ${darkMode ? '#3b82f6' : '#2563eb'} 1px, transparent 0)`, backgroundSize: '40px 40px' }}></div>
-
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
-
-          <motion.div 
-
-             initial={{ opacity: 0, x: -50 }}
-
-             whileInView={{ opacity: 1, x: 0 }}
-
-             viewport={{ once: true }}
-
-          >
-
-            <div className={`inline-block px-3 py-1 rounded mb-6 text-sm font-bold uppercase ${darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-700'}`}>
-
-              Proprietary Tech
-
-            </div>
-
-            <h2 className={`text-5xl md:text-7xl font-black mb-8 leading-none ${darkMode ? 'text-white' : 'text-blue-950'}`}>
-
-              UNMATCHED <br/><span className={darkMode ? "text-blue-400" : "text-blue-600"}>PERFORMANCE</span>
-
-            </h2>
-
-            <p className={`text-xl mb-12 ${darkMode ? 'text-slate-400' : 'text-blue-900/70'}`}>
-
-              We don't just make clothes; we engineer performance. Our finishes are certified by accredited third-party labs to ensure durability and safety.
-
-            </p>
-
-            
-
-            <div className="grid gap-6">
-
-              {[
-
-                { label: "Anti-Stain Technology", desc: "Repels liquids like coffee, tea, juices, and sauces.", icon: <Droplets /> },
-
-                { label: "Anti-Odor Finish", desc: "Garments remain fresh for over 12-hour shifts.", icon: <Wind /> },
-
-                { label: "Easy Care", desc: "Quick-drying, easy to clean and iron, reducing maintenance.", icon: <Leaf /> },
-
-                { label: "Certified Performance", desc: "Finishes certified by accredited third-party labs.", icon: <Award /> },
-
-                { label: "Advanced Features", desc: "Optional wicking, cooling, and heating technologies.", icon: <Sparkles /> }
-
-              ].map((feat, i) => (
-
-                <div key={i} className={`flex items-start gap-6 p-6 rounded-2xl transition-colors ${darkMode ? 'hover:bg-slate-900/80' : 'hover:bg-white hover:shadow-lg hover:shadow-blue-900/5'}`}>
-
-                  <div className={`p-4 rounded-xl shrink-0 ${darkMode ? 'bg-slate-800 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.15)]' : 'bg-blue-100 text-blue-700'}`}>
-
-                    {feat.icon}
-
-                  </div>
-
-                  <div>
-
-                    <h4 className={`text-2xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-blue-900'}`}>{feat.label}</h4>
-
-                    <p className={`text-base ${darkMode ? 'text-slate-500' : 'text-blue-900/60'}`}>{feat.desc}</p>
-
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-          </motion.div>
-
-          <motion.div 
-
-             initial={{ opacity: 0, scale: 0.9 }}
-
-             whileInView={{ opacity: 1, scale: 1 }}
-
-             viewport={{ once: true }}
-
-             className="relative"
-
-          >
-
-             {/* Main Image Container with Carousel */}
-
-             <div className={`relative h-[700px] rounded-[3rem] overflow-hidden shadow-2xl ${darkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-blue-100'}`}>
-
-                <AnimatePresence mode='wait'>
-
-                  <motion.img 
-
-                    key={currentTechImage}
-
-                    src={techImages[currentTechImage]} 
-
-                    initial={{ opacity: 0, scale: 1.1 }}
-
-                    animate={{ opacity: 0.6, scale: 1 }}
-
-                    exit={{ opacity: 0 }}
-
-                    transition={{ duration: 1 }}
-
-                    alt="Fabric Detail" 
-
-                    className="absolute inset-0 w-full h-full object-cover"
-
-                  />
-
-                </AnimatePresence>
-
-                <div className={`absolute inset-0 bg-gradient-to-t ${darkMode ? 'from-slate-950 via-transparent to-transparent' : 'from-blue-50/50 via-transparent to-transparent'}`}></div>
-
-                
-
-                {/* Floating Badge */}
-
-                <div className="absolute bottom-10 left-10 right-10">
-
-                  <div className={`p-8 backdrop-blur-xl rounded-3xl border ${darkMode ? 'bg-slate-900/60 border-slate-700/50' : 'bg-white/80 border-white/50 shadow-lg'}`}>
-
-                    <div className="flex items-end gap-4">
-
-                       <span className={`text-6xl font-black ${darkMode ? 'text-blue-500' : 'text-blue-600'}`}>50+</span>
-
-                       <span className={`text-sm font-bold uppercase tracking-widest pb-4 opacity-70 ${darkMode ? 'text-white' : 'text-blue-900'}`}>Years of <br/>Innovation</span>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-                {/* Carousel Indicators */}
-
-                <div className="absolute bottom-14 right-14 flex gap-2 z-20">
-
-                  {techImages.map((_, idx) => (
-
-                    <div 
-
-                      key={idx} 
-
-                      className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentTechImage ? 'w-8 bg-blue-600' : 'w-2 bg-blue-300/50'}`} 
-
-                    />
-
-                  ))}
-
-                </div>
-
-             </div>
-
-             
-
-             {/* Decorative Elements */}
-
-             <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-
-          </motion.div>
 
         </div>
 
