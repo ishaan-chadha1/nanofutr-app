@@ -38,7 +38,7 @@ const NanoFutr = () => {
 
   const techImages = [
 
-    "https://images.unsplash.com/photo-1565538420870-da58537604ee?auto=format&fit=crop&q=80&w=1000", // Hydrophobic/Water beads close up - fits "Nano" perfectly
+    "https://images.unsplash.com/photo-1565538420870-da58537604ee?auto=format&fit=crop&q=80&w=1000", // Hydrophobic/Water beads close up
 
     "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&q=80&w=1000", // Modern minimalist fashion/retail
 
@@ -208,11 +208,11 @@ const NanoFutr = () => {
 
             <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${darkMode ? 'bg-blue-500 text-white' : 'bg-blue-600 text-white'}`}>
 
-              <span className="font-bold text-lg">N</span>
+              <span className="font-bold text-lg">B</span>
 
             </div>
 
-            <span>NANO<span className={darkMode ? "text-blue-400" : "text-blue-600"}>FUTR</span></span>
+            <span>BRAND <span className={darkMode ? "text-blue-400" : "text-blue-600"}>FOOTPRINT</span></span>
 
           </div>
 
@@ -1412,7 +1412,7 @@ const NanoFutr = () => {
 
                    <label className="text-xs font-bold uppercase tracking-widest opacity-70 ml-2">Email</label>
 
-                   <input type="email" placeholder="vineesh@nanofutr.com" className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 transition-all ${darkMode ? 'bg-slate-900/50 border-slate-600 focus:border-blue-500 focus:ring-blue-500/20' : 'bg-white/10 border-white/20 focus:border-blue-400 focus:ring-blue-400/20 placeholder-gray-400'}`} />
+                   <input type="email" placeholder="contact@brandfootprint.com" className={`w-full p-4 rounded-xl border focus:outline-none focus:ring-2 transition-all ${darkMode ? 'bg-slate-900/50 border-slate-600 focus:border-blue-500 focus:ring-blue-500/20' : 'bg-white/10 border-white/20 focus:border-blue-400 focus:ring-blue-400/20 placeholder-gray-400'}`} />
 
                  </div>
 
@@ -1442,15 +1442,15 @@ const NanoFutr = () => {
 
                 <p className="flex items-center gap-2"><span className="w-2 h-2 bg-green-500 rounded-full animate-pulse block"></span> +91 9886104356</p>
 
-                <p>vineesh@nanofutr.com</p>
+                <p>contact@brandfootprint.com</p>
 
-                <p>www.nanofutr.com</p>
+                <p>www.brandfootprint.com</p>
 
               </div>
 
               <div className="text-left md:text-right">
 
-                <p>© 2025 NanoFutr.</p>
+                <p>© 2025 Brand Footprint.</p>
 
                 <p>Designed with liquid intelligence.</p>
 
