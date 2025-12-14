@@ -8,7 +8,9 @@ import {
 
   ShoppingBag, Coffee, Activity, ArrowRight, Menu, X, 
 
-  ChevronRight, ChevronLeft, Star, CheckCircle2
+  ChevronRight, ChevronLeft, Star, CheckCircle2, 
+
+  Palette, Users, Package, Award, TrendingDown, DollarSign, Sparkles
 
 } from 'lucide-react';
 
@@ -152,9 +154,9 @@ const NanoFutr = () => {
 
       img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1000", 
 
-      short: "From boutiques to service stations.",
+      short: "From high-end boutiques to service stations.",
 
-      description: "In the fast-paced retail environment, your team's appearance is part of the customer experience. Our retail uniforms combine high-fashion aesthetics with industrial durability.",
+      description: "From high-end boutiques to service stations, we deliver uniforms that reflect your brand's quality.",
 
       features: ["Stain-resistant for coffee shops & food retail", "Breathable fabrics for active floor staff", "Custom branding options"]
 
@@ -166,9 +168,9 @@ const NanoFutr = () => {
 
       img: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000", 
 
-      short: "Hotels, restaurants, and cafes.",
+      short: "Hotels, restaurants, cafes, and quick-service chains.",
 
-      description: "First impressions matter most in hospitality. We provide elegant, comfortable uniforms that withstand the rigors of daily service while maintaining a crisp, pristine look.",
+      description: "We provide durable and stylish uniforms for hotels, restaurants, cafes, and quick-service chains.",
 
       features: ["Odor-control for long shifts", "Easy-iron technology", "Elegant cuts for front-of-house staff"]
 
@@ -180,9 +182,9 @@ const NanoFutr = () => {
 
       img: "https://images.unsplash.com/photo-1516574187841-693083f7e74f?auto=format&fit=crop&q=80&w=1000", 
 
-      short: "Specialized scrubs and lab coats.",
+      short: "Hospitals, clinics, and laboratories.",
 
-      description: "Our healthcare line is engineered for safety and hygiene. Featuring advanced antimicrobial finishes and fluid-repellent barriers, our scrubs protect those who protect us.",
+      description: "Specialized, high-performance scrubs and lab coats for hospitals, clinics, and laboratories.",
 
       features: ["Antimicrobial fabric technology", "Fluid repellent barrier", "Maximum mobility design"]
 
@@ -200,7 +202,7 @@ const NanoFutr = () => {
 
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-xl border-b shadow-lg ' + (darkMode ? 'bg-slate-900/80 border-slate-800' : 'bg-white/80 border-blue-100') : 'bg-transparent border-transparent'}`}>
 
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
 
           <div className="text-2xl font-black tracking-tighter flex items-center gap-2 cursor-pointer" onClick={(e) => window.scrollTo({ top: 0, behavior: 'smooth' })}>
 
@@ -216,7 +218,7 @@ const NanoFutr = () => {
 
           {/* Desktop Nav */}
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
 
             {['Why Us', 'Technology', 'Sectors', 'Process'].map((item) => {
 
@@ -232,7 +234,7 @@ const NanoFutr = () => {
 
                   onClick={(e) => scrollToSection(e, id)}
 
-                  className={`text-sm font-bold uppercase tracking-widest hover:text-blue-600 transition-colors ${darkMode ? 'text-slate-400' : 'text-blue-900/60'}`}
+                  className={`text-xs font-bold uppercase tracking-wider hover:text-blue-600 transition-colors whitespace-nowrap ${darkMode ? 'text-slate-400' : 'text-blue-900/60'}`}
 
                 >
 
@@ -544,6 +546,128 @@ const NanoFutr = () => {
 
       </section>
 
+      {/* --- DESIGN-TO-DELIVERY SOLUTION --- */}
+
+      <section id="design-delivery" className={`py-32 px-6 ${darkMode ? 'bg-slate-950' : 'bg-blue-50/30'}`}>
+
+        <div className="max-w-7xl mx-auto">
+
+          <motion.div 
+
+            initial="hidden" 
+
+            whileInView="visible" 
+
+            viewport={{ once: true, margin: "-100px" }}
+
+            variants={fadeInUp}
+
+            className="mb-20 text-center"
+
+          >
+
+            <h2 className={`text-4xl md:text-6xl font-black mb-6 tracking-tight ${darkMode ? 'text-white' : 'text-blue-950'}`}>Design-to-Delivery Solution</h2>
+
+            <div className={`h-1.5 w-32 mx-auto rounded-full ${darkMode ? 'bg-blue-500' : 'bg-blue-600'}`}></div>
+
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            {[
+
+              { 
+
+                title: "Custom Design", 
+
+                desc: "We create custom staff uniforms that align with your brand's visual identity.", 
+
+                icon: <Palette className="w-10 h-10"/>, 
+
+                color: "text-blue-500" 
+
+              },
+
+              { 
+
+                title: "Role-Specific Uniforms", 
+
+                desc: "We offer tailored looks for different staff roles.", 
+
+                icon: <Users className="w-10 h-10"/>, 
+
+                color: "text-indigo-500" 
+
+              },
+
+              { 
+
+                title: "Extensive Product Range", 
+
+                desc: "Shirts, trousers, t-shirts, jackets, scrubs, lab coats, accessories, etc.", 
+
+                icon: <Package className="w-10 h-10"/>, 
+
+                color: "text-sky-500" 
+
+              },
+
+              { 
+
+                title: "Quality Manufacturing", 
+
+                desc: "All garments are manufactured to exacting standards in world-class facilities.", 
+
+                icon: <Award className="w-10 h-10"/>, 
+
+                color: "text-purple-500" 
+
+              },
+
+            ].map((item, index) => (
+
+              <motion.div 
+
+                key={index}
+
+                initial={{ opacity: 0, y: 30 }}
+
+                whileInView={{ opacity: 1, y: 0 }}
+
+                viewport={{ once: true }}
+
+                transition={{ delay: index * 0.1 }}
+
+                whileHover={{ y: -10 }}
+
+                className={`p-8 rounded-2xl border backdrop-blur-sm transition-all group ${
+
+                  darkMode 
+
+                    ? 'bg-slate-800/40 border-slate-700/50 hover:bg-slate-800/80 hover:border-blue-500/30' 
+
+                    : 'bg-white border-blue-100 hover:shadow-xl hover:border-blue-200'
+
+                }`}
+
+              >
+
+                <div className={`${item.color} mb-6 transform group-hover:scale-110 transition-transform duration-300`}>{item.icon}</div>
+
+                <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-blue-900'}`}>{item.title}</h3>
+
+                <p className={`text-base leading-relaxed ${darkMode ? 'text-slate-400' : 'text-blue-900/70'}`}>{item.desc}</p>
+
+              </motion.div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      </section>
+
       {/* --- UNMATCHED TECH (WITH CAROUSEL) --- */}
 
       <section id="technology" className={`py-32 px-6 overflow-hidden relative ${darkMode ? 'bg-slate-950' : 'bg-blue-50/30'}`}>
@@ -588,11 +712,15 @@ const NanoFutr = () => {
 
               {[
 
-                { label: "Anti-Stain", desc: "Repels coffee, tea, juices, and sauces instantly.", icon: <Droplets /> },
+                { label: "Anti-Stain Technology", desc: "Repels liquids like coffee, tea, juices, and sauces.", icon: <Droplets /> },
 
-                { label: "Anti-Odor", desc: "Keeps staff fresh for 12+ hour shifts.", icon: <Wind /> },
+                { label: "Anti-Odor Finish", desc: "Garments remain fresh for over 12-hour shifts.", icon: <Wind /> },
 
-                { label: "Easy Care", desc: "Quick-dry, easy iron, significantly reducing maintenance.", icon: <Leaf /> }
+                { label: "Easy Care", desc: "Quick-drying, easy to clean and iron, reducing maintenance.", icon: <Leaf /> },
+
+                { label: "Certified Performance", desc: "Finishes certified by accredited third-party labs.", icon: <Award /> },
+
+                { label: "Advanced Features", desc: "Optional wicking, cooling, and heating technologies.", icon: <Sparkles /> }
 
               ].map((feat, i) => (
 
@@ -714,6 +842,116 @@ const NanoFutr = () => {
 
       </section>
 
+      {/* --- A SMARTER INVESTMENT --- */}
+
+      <section id="investment" className={`py-32 px-6 ${darkMode ? 'bg-slate-900/30' : 'bg-white'}`}>
+
+        <div className="max-w-7xl mx-auto">
+
+          <motion.div 
+
+            initial="hidden" 
+
+            whileInView="visible" 
+
+            viewport={{ once: true, margin: "-100px" }}
+
+            variants={fadeInUp}
+
+            className="mb-20 text-center"
+
+          >
+
+            <h2 className={`text-4xl md:text-6xl font-black mb-6 tracking-tight ${darkMode ? 'text-white' : 'text-blue-950'}`}>A Smarter Investment</h2>
+
+            <div className={`h-1.5 w-32 mx-auto rounded-full ${darkMode ? 'bg-blue-500' : 'bg-blue-600'}`}></div>
+
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            {[
+
+              { 
+
+                title: "Eco-Friendly & Brand-Positive", 
+
+                desc: "Our sustainable approach enhances your public relations.", 
+
+                icon: <Leaf className="w-12 h-12 mb-6"/>, 
+
+                color: "text-green-500" 
+
+              },
+
+              { 
+
+                title: "Lower Operating Expenses", 
+
+                desc: "Easy-to-maintain uniforms reduce operational costs.", 
+
+                icon: <TrendingDown className="w-12 h-12 mb-6"/>, 
+
+                color: "text-blue-500" 
+
+              },
+
+              { 
+
+                title: "Reduced Capital Expenditures", 
+
+                desc: "Durable uniforms mean fewer replacements over time, lowering long-term investment.", 
+
+                icon: <DollarSign className="w-12 h-12 mb-6"/>, 
+
+                color: "text-indigo-500" 
+
+              },
+
+            ].map((item, index) => (
+
+              <motion.div 
+
+                key={index}
+
+                initial={{ opacity: 0, y: 30 }}
+
+                whileInView={{ opacity: 1, y: 0 }}
+
+                viewport={{ once: true }}
+
+                transition={{ delay: index * 0.1 }}
+
+                whileHover={{ y: -10 }}
+
+                className={`p-10 rounded-[2rem] border backdrop-blur-sm transition-all group ${
+
+                  darkMode 
+
+                    ? 'bg-slate-800/40 border-slate-700/50 hover:bg-slate-800/80 hover:border-blue-500/30' 
+
+                    : 'bg-blue-50/50 border-blue-100 hover:shadow-xl hover:border-blue-200 hover:bg-white'
+
+                }`}
+
+              >
+
+                <div className={`${item.color} transform group-hover:scale-110 transition-transform duration-300`}>{item.icon}</div>
+
+                <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-blue-900'}`}>{item.title}</h3>
+
+                <p className={`text-lg leading-relaxed ${darkMode ? 'text-slate-400' : 'text-blue-900/70'}`}>{item.desc}</p>
+
+              </motion.div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      </section>
+
       {/* --- SECTORS (WITH MODALS) --- */}
 
       <section id="sectors" className={`py-32 px-6 ${darkMode ? 'bg-slate-950' : 'bg-white'}`}>
@@ -795,6 +1033,114 @@ const NanoFutr = () => {
               </motion.div>
 
             ))}
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* --- OUR EXPERTISE --- */}
+
+      <section id="expertise" className={`py-32 px-6 ${darkMode ? 'bg-slate-950' : 'bg-blue-50/30'}`}>
+
+        <div className="max-w-7xl mx-auto">
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+            <motion.div 
+
+              initial={{ opacity: 0, x: -50 }}
+
+              whileInView={{ opacity: 1, x: 0 }}
+
+              viewport={{ once: true }}
+
+            >
+
+              <div className={`inline-block px-3 py-1 rounded mb-6 text-sm font-bold uppercase ${darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-100 text-blue-700'}`}>
+
+                Our Expertise
+
+              </div>
+
+              <h2 className={`text-4xl md:text-6xl font-black mb-8 leading-none ${darkMode ? 'text-white' : 'text-blue-950'}`}>
+
+                Built on <span className={darkMode ? "text-blue-400" : "text-blue-600"}>Experience</span>
+
+              </h2>
+
+              <div className="space-y-6">
+
+                <div className="flex items-start gap-4">
+
+                  <CheckCircle2 className={`w-6 h-6 flex-shrink-0 mt-1 ${darkMode ? 'text-blue-500' : 'text-blue-600'}`} />
+
+                  <p className={`text-lg ${darkMode ? 'text-slate-300' : 'text-blue-900/70'}`}>
+
+                    <span className="font-bold">50+ years</span> of combined experience in apparel design and manufacturing at leading companies.
+
+                  </p>
+
+                </div>
+
+                <div className="flex items-start gap-4">
+
+                  <CheckCircle2 className={`w-6 h-6 flex-shrink-0 mt-1 ${darkMode ? 'text-blue-500' : 'text-blue-600'}`} />
+
+                  <p className={`text-lg ${darkMode ? 'text-slate-300' : 'text-blue-900/70'}`}>
+
+                    Deep expertise in uniform performance and textile innovation.
+
+                  </p>
+
+                </div>
+
+                <div className="flex items-start gap-4">
+
+                  <CheckCircle2 className={`w-6 h-6 flex-shrink-0 mt-1 ${darkMode ? 'text-blue-500' : 'text-blue-600'}`} />
+
+                  <p className={`text-lg ${darkMode ? 'text-slate-300' : 'text-blue-900/70'}`}>
+
+                    Driven by a vision to create the next generation of workwear.
+
+                  </p>
+
+                </div>
+
+              </div>
+
+            </motion.div>
+
+            <motion.div 
+
+              initial={{ opacity: 0, scale: 0.9 }}
+
+              whileInView={{ opacity: 1, scale: 1 }}
+
+              viewport={{ once: true }}
+
+              className="relative"
+
+            >
+
+              <div className={`relative h-[500px] rounded-[3rem] overflow-hidden shadow-2xl ${darkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white border border-blue-100'}`}>
+
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 flex items-center justify-center">
+
+                  <div className="text-center p-12">
+
+                    <div className={`text-8xl font-black mb-4 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>50+</div>
+
+                    <div className={`text-2xl font-bold uppercase tracking-widest ${darkMode ? 'text-white' : 'text-blue-900'}`}>Years of Innovation</div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </motion.div>
 
           </div>
 
@@ -970,7 +1316,7 @@ const NanoFutr = () => {
 
           <div className="text-center mb-20">
 
-             <h2 className={`text-4xl font-bold ${darkMode ? 'text-white' : 'text-blue-950'}`}>Design-to-Delivery</h2>
+             <h2 className={`text-4xl font-bold ${darkMode ? 'text-white' : 'text-blue-950'}`}>Our 3-Step Process</h2>
 
              <p className={`mt-4 ${darkMode ? 'text-slate-500' : 'text-blue-900/60'}`}>A simplified process to get your team fitted.</p>
 
@@ -1097,6 +1443,8 @@ const NanoFutr = () => {
                 <p className="flex items-center gap-2"><span className="w-2 h-2 bg-green-500 rounded-full animate-pulse block"></span> +91 9886104356</p>
 
                 <p>vineesh@nanofutr.com</p>
+
+                <p>www.nanofutr.com</p>
 
               </div>
 
